@@ -1,8 +1,14 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 export default function ReactDocPage() {
   const params = useParams();
+  const navigate = useNavigate();
 
-  return <div>ReactDocPage ##{params.docId}</div>;
+  return (
+    <>
+      <h5 onClick={() => navigate('/')}>logo</h5>
+      <div>ReactDocPage ##{params.docId}</div>
+    </>
+  );
 }
