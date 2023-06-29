@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import axios from 'axios';
 
 export default function ReactPage() {
   // api call -> react에 해당하는 글의 목록을 응답 받음.
@@ -8,9 +9,11 @@ export default function ReactPage() {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch('https://jsonplaceholder.typicode.com/posts');
-      console.log(res);
-      const result = await res.json();
+      const result = await axios.get(
+        'https://jsonplaceholder.typicode.com/posts'
+      );
+      console.log(result.data);
+
       return result;
     }
 
