@@ -21,9 +21,10 @@ const userReducer = (state, action) => {
 
 export default function UserStore(props) {
   const [user, dispatch] = useReducer(userReducer);
+  console.log(user);
 
   return (
-    <UserContext.Provider value={dispatch}>
+    <UserContext.Provider value={{ user, dispatch }}>
       {props.children}
     </UserContext.Provider>
   );
