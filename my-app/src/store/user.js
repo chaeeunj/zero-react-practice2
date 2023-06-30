@@ -1,16 +1,30 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useReducer } from 'react';
 
 export const UserContext = createContext();
 
-export default function UserStore(props) {
-  const [job, setJob] = useState('FE-developer');
+const initialUser = {
+  name: 'jce',
+  job: 'FE-developer',
+};
 
-  const user = {
-    name: 'jce',
-    job,
-    changeJob: (updatedJob) => setJob(updatedJob),
-  };
+const userReducer = (state, action) => {
+  switch (action.type) {
+    case 'changeJob':
+      // state의 job에 해당하는 데이터를 action.text로
+      return { ...state, job: action.text };
+      break;
+
+    default:
+      break;
+  }
+};
+
+export default function UserStore(props) {
+  const [user, dispatch] = useReducer(userReducer);
+
   return (
-    <UserContext.Provider value={user}>{props.children}</UserContext.Provider>
+    <UserContext.Provider value={dispatch}>
+      {props.children}
+    </UserContext.Provider>
   );
 }
